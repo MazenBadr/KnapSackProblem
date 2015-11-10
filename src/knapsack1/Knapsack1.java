@@ -40,28 +40,7 @@ public class Knapsack1 {
         } catch (Exception e) {
 
         }
-//        int[][] values = new int[numOfItems][capacity];
-//        for (int x = 0; x < capacity; x++) {
-//            values[0][x] = 0;
-//        }
-//        for (int i = 0; i < numOfItems; i++) {
-//            for (int x = 0; x < capacity; x++) {
-//                if (i == 0) {
-//                    values[i][x] = 0;
-//                } else if (items.get(i).getSize() <= x) {
-//                    values[i][x] = Integer.max(values[i - 1][x],
-//                            values[i - 1][x - items.get(i).getSize()] + items.get(i).getValue());
-//                } else {
-//                    values[i][x] = values[i - 1][x];
-//                }
-//            }
-//        }
-        System.out.println("sol. is ==> " + bigKnapsack(items, numOfItems, capacity));
-    }
-
-    static public int bigKnapsack(ArrayList<Item> items, int numOfItems, int capacity) {
-        int[][] values = new int[2][capacity];
-        boolean toggle = true;
+        int[][] values = new int[numOfItems][capacity];
         for (int x = 0; x < capacity; x++) {
             values[0][x] = 0;
         }
@@ -70,33 +49,54 @@ public class Knapsack1 {
                 if (i == 0) {
                     values[i][x] = 0;
                 } else if (items.get(i).getSize() <= x) {
-                    if (toggle) {
-                        values[1][x] = Integer.max(values[0][x],
-                                values[0][x - items.get(i).getSize()] + items.get(i).getValue());
-//                        toggle = false;
-                    } else {
-                        values[0][x] = Integer.max(values[1][x],
-                                values[1][x - items.get(i).getSize()] + items.get(i).getValue());
-//                        toggle = true;
-                    }
-
+                    values[i][x] = Integer.max(values[i - 1][x],
+                            values[i - 1][x - items.get(i).getSize()] + items.get(i).getValue());
                 } else {
-                    if (toggle) {
-                        values[1][x] = values[0][x];
-//                        toggle = false;
-                    }else{
-                        values[0][x] = values[1][x];
-//                        toggle = true;
-                    }
+                    values[i][x] = values[i - 1][x];
                 }
-               if(toggle){
-                   toggle = false;
-               } else{
-                   toggle = true;
-               }
             }
         }
-        return Integer.max(values[0][capacity - 1], values[1][capacity - 1]);
+        System.out.println("sol. is ==> " + Integer.max(values[0][capacity - 1], values[1][capacity - 1]));
     }
+
+//    static public int bigKnapsack(ArrayList<Item> items, int numOfItems, int capacity) {
+//        int[][] values = new int[2][capacity];
+//        boolean toggle = true;
+//        for (int x = 0; x < capacity; x++) {
+//            values[0][x] = 0;
+//        }
+//        for (int i = 0; i < numOfItems; i++) {
+//            for (int x = 0; x < capacity; x++) {
+//                if (i == 0) {
+//                    values[i][x] = 0;
+//                } else if (items.get(i).getSize() <= x) {
+//                    if (toggle) {
+//                        values[1][x] = Integer.max(values[0][x],
+//                                values[0][x - items.get(i).getSize()] + items.get(i).getValue());
+////                        toggle = false;
+//                    } else {
+//                        values[0][x] = Integer.max(values[1][x],
+//                                values[1][x - items.get(i).getSize()] + items.get(i).getValue());
+////                        toggle = true;
+//                    }
+//
+//                } else {
+//                    if (toggle) {
+//                        values[1][x] = values[0][x];
+////                        toggle = false;
+//                    }else{
+//                        values[0][x] = values[1][x];
+////                        toggle = true;
+//                    }
+//                }
+//               if(toggle){
+//                   toggle = false;
+//               } else{
+//                   toggle = true;
+//               }
+//            }
+//        }
+//        return Integer.max(values[0][capacity - 1], values[1][capacity - 1]);
+//    }
 
 }
