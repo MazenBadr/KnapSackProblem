@@ -56,7 +56,7 @@ public class Knapsack1 {
                 }
             }
         }
-        System.out.println("sol. is ==> " + Integer.max(values[0][capacity - 1], values[1][capacity - 1]));
+        System.out.println("sol. is ==> " +values[numOfItems-1][capacity - 1]);
     }
 
 //    static public int bigKnapsack(ArrayList<Item> items, int numOfItems, int capacity) {
